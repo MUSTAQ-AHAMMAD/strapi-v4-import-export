@@ -2,6 +2,8 @@
 
 This guide provides detailed instructions for installing the Strapi v4 Import/Export plugin into your **existing Strapi project**.
 
+> 💡 **TypeScript Users**: This JavaScript plugin works perfectly in TypeScript Strapi projects. See the [TypeScript Configuration](#for-typescript-projects-configpluginsts) section for specific setup instructions.
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
@@ -10,6 +12,8 @@ This guide provides detailed instructions for installing the Strapi v4 Import/Ex
   - [Method 2: Download and Copy](#method-2-download-and-copy)
   - [Method 3: Git Submodule](#method-3-git-submodule)
 - [Configuration](#configuration)
+  - [TypeScript Projects](#for-typescript-projects-configpluginsts)
+  - [JavaScript Projects](#for-javascript-projects-configpluginsjs)
 - [Verification](#verification)
 - [Troubleshooting](#troubleshooting)
 - [Uninstallation](#uninstallation)
@@ -22,6 +26,7 @@ Before installing this plugin, ensure you have:
 - ✅ **Node.js** version 14.x or higher
 - ✅ **npm** or **yarn** package manager
 - ✅ An existing Strapi project (if not, create one with `npx create-strapi-app@latest my-project`)
+- ℹ️ **TypeScript or JavaScript**: This plugin works with both TypeScript and JavaScript Strapi projects
 
 ### Check Your Strapi Version
 
@@ -122,23 +127,15 @@ git submodule update --init --recursive
 
 After installing the plugin files, you need to enable it in your Strapi configuration.
 
+> **💡 Important for TypeScript Projects**: This JavaScript plugin works seamlessly in TypeScript Strapi projects. Strapi v4 natively supports JavaScript plugins in TypeScript applications.
+
 ### Step 1: Create or Edit Plugin Configuration
 
-Create or edit the file `config/plugins.js` (or `config/plugins.ts` for TypeScript projects):
-
-#### For JavaScript Projects (`config/plugins.js`)
-
-```javascript
-module.exports = {
-  // ... your existing plugins
-  'import-export': {
-    enabled: true,
-    resolve: './src/plugins/import-export'
-  },
-};
-```
+Choose the appropriate configuration based on your project type:
 
 #### For TypeScript Projects (`config/plugins.ts`)
+
+**If your Strapi project uses TypeScript**, create or edit `config/plugins.ts`:
 
 ```typescript
 export default {
@@ -150,9 +147,48 @@ export default {
 };
 ```
 
-#### Example: Full Configuration File
+**Example with multiple plugins:**
 
-If you already have other plugins configured:
+```typescript
+export default {
+  // Existing plugins
+  'graphql': {
+    enabled: true,
+    config: {
+      endpoint: '/graphql',
+      shadowCRUD: true,
+    }
+  },
+  
+  // Import-Export plugin
+  'import-export': {
+    enabled: true,
+    resolve: './src/plugins/import-export'
+  },
+};
+```
+
+**Key points for TypeScript:**
+- ✅ Use `export default` instead of `module.exports`
+- ✅ File must be named `config/plugins.ts` (not `.js`)
+- ✅ JavaScript plugins work perfectly in TypeScript Strapi projects
+- ✅ No type definitions needed - Strapi handles integration automatically
+
+#### For JavaScript Projects (`config/plugins.js`)
+
+If your Strapi project uses JavaScript, create or edit `config/plugins.js`:
+
+```javascript
+module.exports = {
+  // ... your existing plugins
+  'import-export': {
+    enabled: true,
+    resolve: './src/plugins/import-export'
+  },
+};
+```
+
+**Example with multiple plugins:**
 
 ```javascript
 module.exports = {

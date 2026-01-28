@@ -2,6 +2,8 @@
 
 A comprehensive Strapi v4 plugin that provides dynamic import and export functionality for all content types. This plugin allows you to seamlessly export and import your Strapi content in JSON format without any manual configuration for each content type.
 
+> 💡 **TypeScript Projects**: This plugin is written in JavaScript but **works perfectly in TypeScript Strapi projects**. Strapi v4 supports JavaScript plugins in TypeScript projects out of the box. See the [TypeScript configuration section](#typescript-configuration) below.
+
 ## Features
 
 - ✅ **Dynamic Support**: Works with all content types automatically without requiring customization
@@ -11,6 +13,7 @@ A comprehensive Strapi v4 plugin that provides dynamic import and export functio
 - ✅ **Security**: Authentication required for all operations to protect your data
 - ✅ **Update Support**: Automatically updates existing entries or creates new ones during import
 - ✅ **Modular Architecture**: Clean separation of controllers, services, and routes
+- ✅ **TypeScript Compatible**: Works seamlessly in TypeScript Strapi projects
 
 ## Installation
 
@@ -22,7 +25,20 @@ A comprehensive Strapi v4 plugin that provides dynamic import and export functio
    git clone https://github.com/MUSTAQ-AHAMMAD/strapi-v4-import-export.git import-export
    ```
 
-2. **Enable the plugin in `config/plugins.js` (or `config/plugins.ts`):**
+2. **Enable the plugin in your configuration:**
+
+   **For TypeScript projects** (`config/plugins.ts`):
+   ```typescript
+   export default {
+     // ... other plugins
+     'import-export': {
+       enabled: true,
+       resolve: './src/plugins/import-export'
+     },
+   };
+   ```
+
+   **For JavaScript projects** (`config/plugins.js`):
    ```javascript
    module.exports = {
      // ... other plugins
@@ -251,6 +267,67 @@ const importData = async (contentType, data) => {
 const articles = await exportData('api::article.article');
 await importData('api::article.article', articles.data);
 ```
+
+## TypeScript Configuration
+
+### Using This Plugin in TypeScript Strapi Projects
+
+**Important**: This plugin is written in JavaScript, but it works perfectly in TypeScript Strapi projects. Strapi v4 natively supports JavaScript plugins in TypeScript projects without any additional configuration.
+
+#### TypeScript Configuration File
+
+For TypeScript Strapi projects, create or edit `config/plugins.ts`:
+
+```typescript
+export default {
+  'import-export': {
+    enabled: true,
+    resolve: './src/plugins/import-export'
+  },
+};
+```
+
+#### TypeScript Example with Multiple Plugins
+
+```typescript
+export default {
+  // Other plugins
+  'graphql': {
+    enabled: true,
+    config: {
+      endpoint: '/graphql',
+      shadowCRUD: true,
+    }
+  },
+  
+  // Import/Export plugin
+  'import-export': {
+    enabled: true,
+    resolve: './src/plugins/import-export'
+  },
+};
+```
+
+#### Important Notes for TypeScript Users
+
+1. ✅ **No TypeScript conversion needed**: JavaScript plugins work in TypeScript Strapi projects
+2. ✅ **Type safety**: Your Strapi application remains type-safe; the plugin integrates seamlessly
+3. ✅ **Configuration file**: Use `.ts` extension for your config file (`config/plugins.ts`)
+4. ✅ **Export syntax**: Use `export default` instead of `module.exports` in TypeScript files
+
+#### Verifying TypeScript Compatibility
+
+After installation, verify the plugin works:
+
+```bash
+# Start your TypeScript Strapi project
+npm run develop
+
+# Check for any TypeScript compilation errors
+# The plugin should load without issues
+```
+
+If you encounter any TypeScript-related issues, check the [Troubleshooting](#troubleshooting) section in INSTALLATION.md.
 
 ## Architecture
 

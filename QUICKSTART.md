@@ -2,6 +2,8 @@
 
 Get started with the Strapi v4 Import/Export plugin in minutes!
 
+> 💡 **TypeScript Users**: This JavaScript plugin works perfectly in TypeScript Strapi projects. See [configuration step](#2-enable-the-plugin-1-minute) below.
+
 > 📘 **Need detailed installation help?** Check out the comprehensive [INSTALLATION.md](INSTALLATION.md) guide for troubleshooting, multiple installation methods, and more.
 
 ## 1. Installation (2 minutes)
@@ -21,6 +23,21 @@ cd ../..
 **Important:** The folder must be named `import-export` (not `strapi-v4-import-export`).
 
 ## 2. Enable the Plugin (1 minute)
+
+### For TypeScript Projects
+
+Create or edit `config/plugins.ts`:
+
+```typescript
+export default {
+  'import-export': {
+    enabled: true,
+    resolve: './src/plugins/import-export'
+  },
+};
+```
+
+### For JavaScript Projects
 
 Create or edit `config/plugins.js`:
 
