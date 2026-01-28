@@ -8,12 +8,13 @@ module.exports = ({ strapi }) => ({
     const contentTypes = Object.keys(strapi.contentTypes)
       .filter((uid) => {
         const contentType = strapi.contentTypes[uid];
-        // Filter out system content types
+        // Filter out system content types and user accounts
         return (
           !uid.startsWith('admin::') &&
           !uid.startsWith('plugin::upload') &&
           !uid.startsWith('plugin::users-permissions.permission') &&
           !uid.startsWith('plugin::users-permissions.role') &&
+          !uid.startsWith('plugin::users-permissions.user') &&
           contentType.kind !== 'singleType'
         );
       })
@@ -112,6 +113,13 @@ module.exports = ({ strapi }) => ({
         updated: [],
       };
 
+      // Helper function to create an entry
+      const createEntry = async (cleanEntry) => {
+        return await strapi.entityService.create(contentTypeUid, {
+          data: cleanEntry,
+        });
+      };
+
       for (const entry of data) {
         try {
           // Remove id, createdAt, updatedAt from the entry to avoid conflicts
@@ -120,7 +128,7 @@ module.exports = ({ strapi }) => ({
 
           let result;
 
-          // Check if entry with same id exists
+          // Check if entry with same id exists and try to update
           if (id) {
             try {
               const existing = await strapi.entityService.findOne(
@@ -139,26 +147,24 @@ module.exports = ({ strapi }) => ({
                 results.updated.push({ id: result.id, entry: result });
                 strapi.log.debug(`Updated entry ${id} in ${contentTypeUid}`);
               } else {
-                // Create new entry
-                result = await strapi.entityService.create(contentTypeUid, {
-                  data: cleanEntry,
-                });
+                // Create new entry if id doesn't exist
+                result = await createEntry(cleanEntry);
                 results.success.push({ id: result.id, entry: result });
                 strapi.log.debug(`Created entry in ${contentTypeUid}`);
               }
             } catch (findError) {
+              // Log the error for debugging purposes
+              strapi.log.debug(
+                `Could not find entry ${id}, creating new: ${findError.message}`
+              );
               // If finding fails, try to create
-              result = await strapi.entityService.create(contentTypeUid, {
-                data: cleanEntry,
-              });
+              result = await createEntry(cleanEntry);
               results.success.push({ id: result.id, entry: result });
               strapi.log.debug(`Created entry in ${contentTypeUid}`);
             }
           } else {
             // Create new entry without id
-            result = await strapi.entityService.create(contentTypeUid, {
-              data: cleanEntry,
-            });
+            result = await createEntry(cleanEntry);
             results.success.push({ id: result.id, entry: result });
             strapi.log.debug(`Created entry in ${contentTypeUid}`);
           }

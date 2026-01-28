@@ -6,8 +6,8 @@ module.exports = ({ strapi }) => ({
    */
   async getContentTypes(ctx) {
     try {
-      // Check user permissions
-      if (!ctx.state.user && ctx.request.header.authorization) {
+      // Check user permissions - authentication required
+      if (!ctx.state.user) {
         return ctx.unauthorized('You must be authenticated to access this resource');
       }
 
@@ -32,8 +32,8 @@ module.exports = ({ strapi }) => ({
     try {
       const { contentType } = ctx.params;
 
-      // Check user permissions
-      if (!ctx.state.user && ctx.request.header.authorization) {
+      // Check user permissions - authentication required
+      if (!ctx.state.user) {
         return ctx.unauthorized('You must be authenticated to export data');
       }
 
@@ -58,8 +58,8 @@ module.exports = ({ strapi }) => ({
    */
   async exportAll(ctx) {
     try {
-      // Check user permissions
-      if (!ctx.state.user && ctx.request.header.authorization) {
+      // Check user permissions - authentication required
+      if (!ctx.state.user) {
         return ctx.unauthorized('You must be authenticated to export data');
       }
 
@@ -83,8 +83,8 @@ module.exports = ({ strapi }) => ({
       const { contentType } = ctx.params;
       const { data } = ctx.request.body;
 
-      // Check user permissions
-      if (!ctx.state.user && ctx.request.header.authorization) {
+      // Check user permissions - authentication required
+      if (!ctx.state.user) {
         return ctx.unauthorized('You must be authenticated to import data');
       }
 

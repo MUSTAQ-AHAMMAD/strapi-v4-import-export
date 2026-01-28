@@ -8,7 +8,7 @@ A comprehensive Strapi v4 plugin that provides dynamic import and export functio
 - ✅ **RESTful API**: Simple HTTP endpoints for importing and exporting data
 - ✅ **Bulk Operations**: Export all content types at once or work with individual types
 - ✅ **Error Handling**: Comprehensive error logging and failure handling during import operations
-- ✅ **Security**: Built-in permission checks to protect your data
+- ✅ **Security**: Authentication required for all operations to protect your data
 - ✅ **Update Support**: Automatically updates existing entries or creates new ones during import
 - ✅ **Modular Architecture**: Clean separation of controllers, services, and routes
 
@@ -272,18 +272,31 @@ strapi-v4-import-export/
 
 ## Security
 
-The plugin includes basic security checks:
+The plugin includes security measures to protect your data:
 
-- Authentication validation when authorization headers are present
-- Content type validation to prevent invalid operations
-- Input validation for all endpoints
-- Error logging without exposing sensitive information
+- **Authentication Required**: All endpoints require user authentication
+- **Content Type Validation**: Validates content types exist before operations
+- **Input Validation**: Validates request inputs before processing
+- **User Data Protection**: Excludes sensitive user account data from export/import
+- **Error Logging**: Logs errors without exposing sensitive information
 
-For production use, consider:
-- Enabling stricter authentication requirements
-- Adding role-based access control (RBAC)
-- Rate limiting import/export operations
-- Implementing data validation schemas
+### Authentication
+
+All API endpoints require authentication. You need to include an authentication token in your requests:
+
+```bash
+# Example with JWT token
+curl -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  http://localhost:1337/api/import-export/content-types
+```
+
+### Additional Security Recommendations for Production
+
+- Implement role-based access control (RBAC) to restrict who can import/export
+- Add rate limiting to prevent abuse of import/export operations
+- Implement data validation schemas for imported data
+- Consider adding audit logging for compliance requirements
+- Review and customize the content type filters in the service
 
 ## Error Handling
 
@@ -303,9 +316,12 @@ During import operations:
 ## Limitations
 
 - System content types (admin, upload, permissions, roles) are excluded from export/import
-- Single-type content types are currently excluded
-- Relation fields are populated during export but may require special handling during import
-- Media files (uploaded assets) are not included in the export
+- User accounts (plugin::users-permissions.user) are excluded for security reasons
+- Single-type content types are excluded by design
+- Relation fields are populated during export but may require existing referenced entries during import
+- Media files (uploaded assets) are not included in the export - only references are exported
+- Import operations are not transactional - partial failures can occur
+- Large datasets may cause memory issues - consider implementing pagination for production use
 
 ## Contributing
 

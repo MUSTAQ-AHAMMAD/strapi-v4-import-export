@@ -7,7 +7,6 @@ module.exports = [
     handler: 'importExportController.importData',
     config: {
       policies: [],
-      auth: false,
     },
   },
   {
@@ -16,7 +15,6 @@ module.exports = [
     handler: 'importExportController.exportData',
     config: {
       policies: [],
-      auth: false,
     },
   },
   {
@@ -25,7 +23,6 @@ module.exports = [
     handler: 'importExportController.exportAll',
     config: {
       policies: [],
-      auth: false,
     },
   },
   {
@@ -34,7 +31,6 @@ module.exports = [
     handler: 'importExportController.getContentTypes',
     config: {
       policies: [],
-      auth: false,
     },
   },
 ];
