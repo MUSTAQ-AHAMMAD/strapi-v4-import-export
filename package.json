@@ -1,0 +1,32 @@
+{
+  "name": "strapi-v4-import-export",
+  "version": "1.0.0",
+  "description": "A Strapi v4 plugin for importing and exporting content dynamically for all content types",
+  "strapi": {
+    "name": "import-export",
+    "description": "Import and export content for all content types",
+    "kind": "plugin",
+    "displayName": "Import Export"
+  },
+  "main": "./server/index.js",
+  "keywords": [
+    "strapi",
+    "strapi-plugin",
+    "import",
+    "export",
+    "content",
+    "strapi-v4"
+  ],
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "author": {
+    "name": "MUSTAQ-AHAMMAD"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MUSTAQ-AHAMMAD/strapi-v4-import-export.git"
+  }
+}
