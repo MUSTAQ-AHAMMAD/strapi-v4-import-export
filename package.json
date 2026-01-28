@@ -1,6 +1,6 @@
 {
   "name": "strapi-v4-import-export",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Strapi v4 plugin for importing and exporting content dynamically for all content types",
   "strapi": {
     "name": "import-export",

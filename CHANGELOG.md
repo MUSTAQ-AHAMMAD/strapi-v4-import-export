@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2026-01-28
+
+### Added
+- Comprehensive TypeScript compatibility documentation throughout all guides
+- New `config.example.ts` file with TypeScript configuration template
+- Prominent TypeScript compatibility notices in README.md, INSTALLATION.md, and QUICKSTART.md
+- Dedicated "TypeScript Configuration" section in README.md
+- TypeScript-first configuration examples in INSTALLATION.md
+- Clarification that JavaScript plugins work perfectly in TypeScript Strapi projects
+
+### Changed
+- Reordered configuration sections to show TypeScript examples first
+- Enhanced `config.example.js` with better documentation
+- Updated all documentation to emphasize TypeScript compatibility
+- Added "TypeScript Compatible" to feature list
+
+### Documentation
+- Clearly documented that no conversion or type definitions are needed
+- Added verification steps for TypeScript users
+- Included examples with multiple plugins for TypeScript projects
+- Enhanced troubleshooting section with TypeScript-specific guidance
+
 ## [1.0.1] - 2026-01-28
 
 ### Added
