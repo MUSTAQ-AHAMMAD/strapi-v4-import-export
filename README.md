@@ -14,14 +14,15 @@ A comprehensive Strapi v4 plugin that provides dynamic import and export functio
 
 ## Installation
 
-### As a Plugin in Your Strapi Project
+### Quick Installation for Existing Strapi Projects
 
-1. Copy this plugin to your Strapi project's plugins directory:
+1. **Clone the plugin into your Strapi project:**
    ```bash
-   cp -r strapi-v4-import-export ./src/plugins/import-export
+   cd your-strapi-project/src/plugins
+   git clone https://github.com/MUSTAQ-AHAMMAD/strapi-v4-import-export.git import-export
    ```
 
-2. Enable the plugin in your `config/plugins.js` (or `config/plugins.ts`):
+2. **Enable the plugin in `config/plugins.js` (or `config/plugins.ts`):**
    ```javascript
    module.exports = {
      // ... other plugins
@@ -32,10 +33,17 @@ A comprehensive Strapi v4 plugin that provides dynamic import and export functio
    };
    ```
 
-3. Restart your Strapi server:
+3. **Restart your Strapi server:**
    ```bash
    npm run develop
    ```
+
+📚 **Need detailed installation instructions?** See the comprehensive [INSTALLATION.md](INSTALLATION.md) guide for:
+- Prerequisites and compatibility check
+- Multiple installation methods (clone, download, git submodule)
+- Step-by-step configuration
+- Troubleshooting common issues
+- Verification steps
 
 ## API Endpoints
 

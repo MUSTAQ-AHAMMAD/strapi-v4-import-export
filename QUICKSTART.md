@@ -2,20 +2,23 @@
 
 Get started with the Strapi v4 Import/Export plugin in minutes!
 
+> 📘 **Need detailed installation help?** Check out the comprehensive [INSTALLATION.md](INSTALLATION.md) guide for troubleshooting, multiple installation methods, and more.
+
 ## 1. Installation (2 minutes)
 
-### Option A: Copy to Your Project
+### Option A: Clone Repository (Recommended)
 ```bash
-# Copy the plugin to your Strapi project's plugins directory
-cp -r strapi-v4-import-export ./your-strapi-project/src/plugins/import-export
-```
-
-### Option B: Clone Repository
-```bash
-# Clone directly into your Strapi project
+# Navigate to your Strapi project and clone the plugin
 cd your-strapi-project/src/plugins
 git clone https://github.com/MUSTAQ-AHAMMAD/strapi-v4-import-export.git import-export
+cd ../..
 ```
+
+### Option B: Download and Copy
+1. Download from: https://github.com/MUSTAQ-AHAMMAD/strapi-v4-import-export
+2. Extract and copy to `your-strapi-project/src/plugins/import-export`
+
+**Important:** The folder must be named `import-export` (not `strapi-v4-import-export`).
 
 ## 2. Enable the Plugin (1 minute)
 
